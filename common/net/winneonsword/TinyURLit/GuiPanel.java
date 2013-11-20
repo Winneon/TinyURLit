@@ -81,7 +81,7 @@ public class GuiPanel extends JFrame {
 				
 				if (!(check)){
 					
-					JOptionPane.showMessageDialog(null, "That is not a valid URL!", null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "<html><strong>That is not a valid URL!</strong></html>", null, JOptionPane.ERROR_MESSAGE);
 					
 				} else {
 					
