@@ -11,6 +11,12 @@ public class LinkShortener {
 		
 		String link = "";
 		
+		if (!(URL.startsWith("http"))){
+			
+			URL = "http://" + URL;
+			
+		}
+		
 		try {
 			
 			URL url = new URL("http://www.tinyurl.com/api-create.php?url=" + URL);
@@ -33,11 +39,44 @@ public class LinkShortener {
 			
 		} catch (Exception e){
 			
-			throw new RuntimeException("Failed to shorten link. Check tinyurl.com for errors or contact the developer.");
+			link = "Failed to shorten link. Check tinyurl.com for errors or contact the developer.";
 			
 		}
 		
 		return link;
+		
+	}
+	
+	public static boolean checkLink(String URL){
+		
+		boolean validate = false;
+		
+		try {
+			
+			URL url = new URL("http://" + URL);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			
+			connection.setRequestMethod("GET");
+			
+			if (connection.getResponseCode() == 404){
+				
+				validate = false;
+				
+			} else {
+				
+				validate = true;
+				
+			}
+			
+			connection.disconnect();
+			
+		} catch (Exception e){
+			
+			validate = false;
+			
+		}
+		
+		return validate;
 		
 	}
 	

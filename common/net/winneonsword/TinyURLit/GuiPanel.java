@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
@@ -76,9 +77,19 @@ public class GuiPanel extends JFrame {
 			
 			public void actionPerformed(ActionEvent e){
 				
-				shortenedLink = LinkShortener.shorten(url.getText());
-				link.setText(shortenedLink);
-				dialog.setVisible(true);
+				boolean check = LinkShortener.checkLink(url.getText());
+				
+				if (!(check)){
+					
+					JOptionPane.showMessageDialog(null, "That is not a valid URL!", null, JOptionPane.ERROR_MESSAGE);
+					
+				} else {
+					
+					shortenedLink = LinkShortener.shorten(url.getText());
+					link.setText(shortenedLink);
+					dialog.setVisible(true);
+					
+				}
 				
 			}
 			
