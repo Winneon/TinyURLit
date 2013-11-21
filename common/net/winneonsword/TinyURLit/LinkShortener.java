@@ -51,9 +51,15 @@ public class LinkShortener {
 		
 		boolean validate = false;
 		
+		if (!(URL.startsWith("http"))){
+			
+			URL = "http://" + URL;
+			
+		}
+		
 		try {
 			
-			URL url = new URL("http://" + URL);
+			URL url = new URL(URL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			
 			connection.setRequestMethod("GET");

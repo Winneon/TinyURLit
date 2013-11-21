@@ -50,9 +50,21 @@ public class GuiPanel extends JFrame {
 		this.url.setToolTipText("Enter link to shorten.");
 		this.url.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		
+		ActionListener textAction = new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e){
+				
+				runShorten();
+				
+			}
+			
+		};
+		
+		this.url.addActionListener(textAction);
+		
 		this.dialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.dialog.setResizable(false);
-		this.dialog.setSize(400, 85);
+		this.dialog.setSize(400, 65);
 		this.dialog.setLocationRelativeTo(null);
 		this.dialog.setVisible(false);
 		
@@ -77,19 +89,7 @@ public class GuiPanel extends JFrame {
 			
 			public void actionPerformed(ActionEvent e){
 				
-				boolean check = LinkShortener.checkLink(url.getText());
-				
-				if (!(check)){
-					
-					JOptionPane.showMessageDialog(null, "<html><strong>That is not a valid URL!</strong></html>", null, JOptionPane.ERROR_MESSAGE);
-					
-				} else {
-					
-					shortenedLink = LinkShortener.shorten(url.getText());
-					link.setText(shortenedLink);
-					dialog.setVisible(true);
-					
-				}
+				runShorten();
 				
 			}
 			
@@ -112,6 +112,24 @@ public class GuiPanel extends JFrame {
 		this.setSize(400, 85);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
+	}
+	
+	public void runShorten(){
+		
+		boolean check = LinkShortener.checkLink(url.getText());
+		
+		if (!(check)){
+			
+			JOptionPane.showMessageDialog(null, "<html><strong>That is not a valid URL!</strong></html>", null, JOptionPane.ERROR_MESSAGE);
+			
+		} else {
+			
+			shortenedLink = LinkShortener.shorten(url.getText());
+			link.setText(shortenedLink);
+			dialog.setVisible(true);
+			
+		}
 		
 	}
 	
